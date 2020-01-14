@@ -1,18 +1,14 @@
 package com.direa.excelupload.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-public class MainController {
+public class FormInsertController {
 
-    @GetMapping("/")
-    public String index(Model model) {
-        System.out.println("aaa");
-        return "indexForm";
+    @GetMapping("/insertForm.do")
+    public String insertForm() {
+        return "insertForm";
     }
-
-
 }
