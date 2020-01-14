@@ -1,4 +1,5 @@
 <!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,14 @@
     <title>Document</title>
 </head>
 <body>
-Excel Upload
+Excel Upload<br><br><br>
+
+<div align="center">
+    <form method="post" action="/excelUploadOk.do" enctype="multipart/form-data">
+        <input type="file" id="files" name="files" multiple="multiple">
+        <br>
+        <input type="submit" value="업로드">
+    </form>
+</div>
 </body>
 </html>
