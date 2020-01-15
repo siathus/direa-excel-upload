@@ -60,46 +60,47 @@ public class ExcelUploadController {
                         // row 탐색 for문
                         for (int rowIndex = 0; rowIndex < currentSheet.getPhysicalNumberOfRows(); rowIndex++) {
                             // row 0은 헤더정보이기 때문에 무시
-//                            if (rowIndex != 0) {
-                            // 현재 row 반환
-                            currentRow = currentSheet.getRow(rowIndex);
+                            if (rowIndex != 0) {
+                                // 현재 row 반환
+                                currentRow = currentSheet.getRow(rowIndex);
 
-                            String value = "";
+                                String value = "";
 
-                            CommuteVO commuteVO = new CommuteVO();
-                            // cell 탐색
-                            for (int cellIndex = 0; cellIndex < currentRow.getPhysicalNumberOfCells(); cellIndex++) {
-                                currentCell = currentRow.getCell(cellIndex);
-                                switch (currentCell.getCellTypeEnum()) {
-                                    case FORMULA:
-                                        value = currentCell.getCellFormula();
-                                        break;
-                                    case STRING:
-                                        value = currentCell.getStringCellValue();
-                                        break;
-                                    case NUMERIC:
-                                        value = currentCell.getNumericCellValue() + "";
-                                        break;
-                                    case BLANK:
-                                        value = "";
-                                        break;
-                                    default:
-                                        break;
+                                CommuteVO commuteVO = new CommuteVO();
+                                // cell 탐색
+                                for (int cellIndex = 0; cellIndex < currentRow.getPhysicalNumberOfCells(); cellIndex++) {
+                                    currentCell = currentRow.getCell(cellIndex);
+                                    switch (currentCell.getCellTypeEnum()) {
+                                        case FORMULA:
+                                            value = currentCell.getCellFormula();
+                                            break;
+                                        case STRING:
+                                            value = currentCell.getStringCellValue();
+                                            break;
+                                        case NUMERIC:
+                                            value = currentCell.getNumericCellValue() + "";
+                                            break;
+                                        case BLANK:
+                                            value = "";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    System.out.print(value + "\t\t");
+                                    // VO 생성 후 list에 추가
+                                    try {
+                                        commuteVO.setField(cellIndex, value);
+                                    } catch (CustomException ce) {
+                                        ce.printStackTrace();
+                                    }
                                 }
-                                System.out.print(value + "\t\t");
-                                // VO 생성 후 list에 추가
-                                try {
-                                    commuteVO.setField(cellIndex, value);
-                                } catch (CustomException ce) {
-                                    ce.printStackTrace();
-                                }
+                                // 한 시트 내의 commuteVO 정보 저장
+                                commuteList.add(commuteVO);
+
+                                System.out.println();
                             }
-                            // 한 시트 내의 commuteVO 정보 저장
-                            commuteList.add(commuteVO);
-
-                            System.out.println();
-//                            }
                         }
+                        System.out.println("=========== 현 시트의 총 Row 수 : " + currentSheet.getPhysicalNumberOfRows() + " ==============");
                     }
                     // 파일 리스트에 commute 추가
                     excelFileList.add(commuteList);
@@ -107,9 +108,11 @@ public class ExcelUploadController {
                     e.printStackTrace();
                 }
             }
-            System.out.println("======================");
+            System.out.println("============================================");
         }
 
+        // TODO Elastic API 구축되면 할 것
+        /*
         for (List<CommuteVO> commuteVOList : excelFileList) {
             PrintWriter out = null;
             try {
@@ -117,6 +120,7 @@ public class ExcelUploadController {
                 out.println("<script>");
 
                 // Elastic API 호출 후 boolean 결과값 받아옴
+
                 if (elasticAPI.putCommuteIndex(commuteVOList)) {
                     out.println("alert('완료되었습니다.');");
                     out.println("location.href='/'");
@@ -133,6 +137,7 @@ public class ExcelUploadController {
                 out.close();
             }
         }
+        */
         return null;
     }
 }
