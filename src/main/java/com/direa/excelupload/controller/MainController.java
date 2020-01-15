@@ -10,7 +10,6 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model) {
-        System.out.println("aaa");
         return "indexForm";
     }
 

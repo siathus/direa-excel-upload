@@ -20,7 +20,7 @@ public class CommuteVO {
 	private String nightWorkTime;
 	private String holydayWorkTime;
 	private String totalWorkTime;
-	private String nomalWorkTime;
+	private String normalWorkTime;
 	private String goingOut;
 	
 	public void setField(int num, String value) throws CustomException {
@@ -39,11 +39,33 @@ public class CommuteVO {
 		case 11: setNightWorkTime(value);   break;
 		case 12: setHolydayWorkTime(value); break;
 		case 13: setTotalWorkTime(value);   break;
-		case 14: setNomalWorkTime(value);   break;
+		case 14: setNormalWorkTime(value);   break;
 		case 15: setGoingOut(value);        break;
 
 		default:
 			throw new CustomException("엑셀파일의 컬럼 수가 정의보다 많습니다. ("+num+")("+value+")");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "CommuteVO{" +
+				"date='" + date + '\'' +
+				", group='" + group + '\'' +
+				", name='" + name + '\'' +
+				", holyday='" + holyday + '\'' +
+				", startTime='" + startTime + '\'' +
+				", endTime='" + endTime + '\'' +
+				", startType='" + startType + '\'' +
+				", endType='" + endType + '\'' +
+				", lateTime='" + lateTime + '\'' +
+				", earlyWorkTime='" + earlyWorkTime + '\'' +
+				", lateWorkTime='" + lateWorkTime + '\'' +
+				", nightWorkTime='" + nightWorkTime + '\'' +
+				", holydayWorkTime='" + holydayWorkTime + '\'' +
+				", totalWorkTime='" + totalWorkTime + '\'' +
+				", normalWorkTime='" + normalWorkTime + '\'' +
+				", goingOut='" + goingOut + '\'' +
+				'}';
 	}
 }
