@@ -1,17 +1,12 @@
 package com.direa.excelupload.controller;
 
-import org.apache.catalina.filters.ExpiresFilter;
+import com.direa.excelupload.vo.ClientcallVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.direa.excelupload.vo.ClientcallVO;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class FormInsertController {
@@ -60,7 +55,6 @@ public class FormInsertController {
         System.out.println("occurredTime  :"+vo.getOccurredTime());
         System.out.println("currentStatus  :"+vo.getCurrentStatus());
         System.out.println("additionalSupport :"+vo.getAdditionalSupport() );
-
 
 
         return "/checkParam";
