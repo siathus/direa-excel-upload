@@ -11,6 +11,9 @@
     <groupId>com.direa</groupId>
     <artifactId>excel-upload</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <!-- war 파일로 packaging -->
+    <packaging>war</packaging>
+
     <name>excel-upload</name>
     <description>Demo project for Spring Boot</description>
 
@@ -19,10 +22,6 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-mustache</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -39,6 +38,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- marked the embedded servlet container as provided -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- JSP 엔진 -->
         <dependency>
@@ -49,14 +54,14 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-        
+
         <!-- vo라이브러리 -->
         <dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Elastic client API  -->
         <!-- 
         <dependency>

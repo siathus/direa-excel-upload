@@ -57,13 +57,14 @@ public class ExcelUploadController {
                     for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
                         // 현재 Sheet 반환
                         currentSheet = workbook.getSheetAt(sheetIndex);
+
+                        System.out.println("=========== 현 시트의 총 Row 수 (컬럼명 포함) : " + currentSheet.getPhysicalNumberOfRows() + " ==============");
                         // row 탐색 for문
                         for (int rowIndex = 0; rowIndex < currentSheet.getPhysicalNumberOfRows(); rowIndex++) {
                             // row 0은 헤더정보이기 때문에 무시
                             if (rowIndex != 0) {
                                 // 현재 row 반환
                                 currentRow = currentSheet.getRow(rowIndex);
-
                                 String value = "";
 
                                 CommuteVO commuteVO = new CommuteVO();
@@ -86,7 +87,6 @@ public class ExcelUploadController {
                                         default:
                                             break;
                                     }
-                                    System.out.print(value + "\t\t");
                                     // VO 생성 후 list에 추가
                                     try {
                                         commuteVO.setField(cellIndex, value);
@@ -97,10 +97,12 @@ public class ExcelUploadController {
                                 // 한 시트 내의 commuteVO 정보 저장
                                 commuteList.add(commuteVO);
 
-                                System.out.println();
                             }
                         }
-                        System.out.println("=========== 현 시트의 총 Row 수 : " + currentSheet.getPhysicalNumberOfRows() + " ==============");
+                        // 개발 시 검증용 전체목록 출력 메소드
+//                        printCommuteVO(commuteList);
+
+                        System.out.println("========== Sheet 내용 => CommuteVO 변환 완료 ===========");
                     }
                     // 파일 리스트에 commute 추가
                     excelFileList.add(commuteList);
@@ -138,6 +140,25 @@ public class ExcelUploadController {
             }
         }
         */
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('업로드가 완료됐습니다. index 페이지로 돌아갑니다.')");
+            out.println("location.href='/'");
+            out.println("</script>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            out.close();
+        }
         return null;
+    }
+
+    private void printCommuteVO(List<CommuteVO> commuteVOList) {
+        for (int i = 0; i < commuteVOList.size(); i++) {
+            CommuteVO commuteVO = commuteVOList.get(i);
+            System.out.println((i + 1) + "번째 열 : " + commuteVO.toString());
+        }
     }
 }
